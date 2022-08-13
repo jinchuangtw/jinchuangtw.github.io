@@ -4,25 +4,27 @@
 <script src="/config.e1b9f4b319e2bf0451ef.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
-<title>Hello World - Jin's Space</title>
+<title>如何從零開始建立屬於自己的 Neovim 高效開發環境 - Jin's Space</title>
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<link rel="canonical" href="https://jinchuangtw.github.io/2022/08/13/hello-world/">
+<link rel="canonical" href="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="本文仍在持續更新中，若有任何疑問、勘誤，請來信 jinchuang1999@gmail.com  前言：為何不使用現成的 IDE 在這個人人學程式的時代，集成式開發環境（Integrated Development Environment, IDE）往往是入門者寫程式的首選，其直覺化的圖形介面、便捷的程式庫引入方式，可以讓使用者免於繁複的設定，只需專注學習程式的概念以及語法 —— 如筆者在大學修">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://jinchuangtw.github.io/2022/08/13/hello-world/index.html">
+<meta property="og:title" content="如何從零開始建立屬於自己的 Neovim 高效開發環境">
+<meta property="og:url" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/index.html">
 <meta property="og:site_name" content="Jin&#39;s Space">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="本文仍在持續更新中，若有任何疑問、勘誤，請來信 jinchuang1999@gmail.com  前言：為何不使用現成的 IDE 在這個人人學程式的時代，集成式開發環境（Integrated Development Environment, IDE）往往是入門者寫程式的首選，其直覺化的圖形介面、便捷的程式庫引入方式，可以讓使用者免於繁複的設定，只需專注學習程式的概念以及語法 —— 如筆者在大學修">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=160">
-<meta property="article:published_time" content="2022-08-13T06:31:00.866Z">
-<meta property="article:modified_time" content="2022-08-13T06:31:00.866Z">
+<meta property="og:image" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/2022/08/05/22-08-05-neovim-tutorial/coding.jpg">
+<meta property="article:published_time" content="2022-08-05T06:59:34.000Z">
+<meta property="article:modified_time" content="2022-08-13T07:03:42.853Z">
 <meta property="article:author" content="Jin Chuang">
+<meta property="article:tag" content="neovim">
+<meta property="article:tag" content="environment">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=160">
+<meta name="twitter:image" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/2022/08/05/22-08-05-neovim-tutorial/coding.jpg">
 
 
 <!-- hexo injector head_end start --><style is="theme">html{--inside-accent-color:#2a2b33;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#2a2b33;--inside-card-background:#fff;--inside-font-base:'Josefin Sans','PingFang SC';--inside-font-logo:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-menu:Baloo Bhaijaan,'Josefin Sans','PingFang SC';--inside-font-heading:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-font-label:Montserrat,'Josefin Sans','PingFang SC';--inside-font-code:Inconsolata,monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:660px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(42,43,51,.05);--inside-accent-color-01:rgba(42,43,51,.1);--inside-accent-color-02:rgba(42,43,51,.2);--inside-accent-color-04:rgba(42,43,51,.4);--inside-accent-color-08:rgba(42,43,51,.8)}</style><script src="/theme.9ecc9ab1.js"></script><link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet"></link><link href="/styles.91e7dfca63c7c151daa6.css" rel="stylesheet"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
