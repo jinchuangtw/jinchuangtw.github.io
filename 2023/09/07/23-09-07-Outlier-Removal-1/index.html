@@ -4,27 +4,26 @@
 <script src="/config.7c463f5684e1273fc129.js"></script>
 <!-- hexo injector head_begin end -->
 <meta charset="utf-8">
-<title>Neovim 高效開發環境：配置心得與分享 - Jin's Blog</title>
+<title>Outlier Removal 演算法回顧 (1) - RANSAC - Jin's Blog</title>
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<link rel="canonical" href="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/">
+<link rel="canonical" href="https://jinchuangtw.github.io/2023/09/07/23-09-07-Outlier-Removal-1/">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-<meta name="description" content="10dd 一次刪除 10 行、yG 複製至檔案末端 … 是時候挑戰這個神秘古老的編輯器了。">
+<meta name="description" content="本系列文將會介紹經典的三種 outlier removal 演算法，包括 RANSAC [1] 以及其衍生版本：MSAC (M-estimator) 與 MLESAC (Maximum Likelihood Estimate Sample Consensus) [2]。 首先介紹 outlier 的直觀意義與這些演算法試圖達到的目的。 量測數據解讀：雜訊與離群值 Noise and Outlier">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Neovim 高效開發環境：配置心得與分享">
-<meta property="og:url" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/index.html">
+<meta property="og:title" content="Outlier Removal 演算法回顧 (1) - RANSAC">
+<meta property="og:url" content="https://jinchuangtw.github.io/2023/09/07/23-09-07-Outlier-Removal-1/index.html">
 <meta property="og:site_name" content="Jin&#39;s Blog">
-<meta property="og:description" content="10dd 一次刪除 10 行、yG 複製至檔案末端 … 是時候挑戰這個神秘古老的編輯器了。">
+<meta property="og:description" content="本系列文將會介紹經典的三種 outlier removal 演算法，包括 RANSAC [1] 以及其衍生版本：MSAC (M-estimator) 與 MLESAC (Maximum Likelihood Estimate Sample Consensus) [2]。 首先介紹 outlier 的直觀意義與這些演算法試圖達到的目的。 量測數據解讀：雜訊與離群值 Noise and Outlier">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/2022/08/05/22-08-05-neovim-tutorial/coding.jpg">
-<meta property="article:published_time" content="2022-08-05T06:59:34.000Z">
-<meta property="article:modified_time" content="2022-09-03T11:48:17.143Z">
+<meta property="og:image" content="https://jinchuangtw.github.io/2023/09/07/23-09-07-Outlier-Removal-1/2023/09/07/23-09-07-Outlier-Removal-1/models.png">
+<meta property="article:published_time" content="2023-09-07T09:41:49.000Z">
+<meta property="article:modified_time" content="2023-09-07T10:57:19.479Z">
 <meta property="article:author" content="Jin Chuang">
-<meta property="article:tag" content="neovim">
-<meta property="article:tag" content="workflow">
+<meta property="article:tag" content="SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jinchuangtw.github.io/2022/08/05/22-08-05-neovim-tutorial/2022/08/05/22-08-05-neovim-tutorial/coding.jpg">
+<meta name="twitter:image" content="https://jinchuangtw.github.io/2023/09/07/23-09-07-Outlier-Removal-1/2023/09/07/23-09-07-Outlier-Removal-1/models.png">
 
 
 <!-- hexo injector head_end start --><style is="theme">html{--inside-accent-color:#2a2b33;--inside-foreground-color:#363636;--inside-border-color:#e0e0e0;--inside-background:#f3f6f7;--inside-sidebar-background:#2a2b33;--inside-card-background:#fff;--inside-font-base:'Noto Sans','PingFang SC';--inside-font-logo:Lobster,'Noto Sans','PingFang SC';--inside-font-menu:Baloo Bhaijaan,'Noto Sans','PingFang SC';--inside-font-heading:Open Sans,'Noto Sans','PingFang SC';--inside-font-label:Noto Sans,'Noto Sans','PingFang SC';--inside-font-code:monospace;--inside-font-print:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;--inside-content-width:1000px;--inside-highlight-00:#ffffff;--inside-highlight-01:#e0e0e0;--inside-highlight-02:#f3f6f7;--inside-highlight-03:#95a5b3;--inside-highlight-04:#363636;--inside-highlight-05:#262b2f;--inside-highlight-06:#000000;--inside-highlight-07:#000000;--inside-highlight-08:#5d6c7b;--inside-highlight-09:#40464a;--inside-highlight-0a:#2980b9;--inside-highlight-0b:#be516e;--inside-highlight-0c:#237dac;--inside-highlight-0d:#944770;--inside-highlight-0e:#239371;--inside-highlight-0f:#edf0f3;--inside-card-color:#fff;--inside-accent-color-005:rgba(42,43,51,.05);--inside-accent-color-01:rgba(42,43,51,.1);--inside-accent-color-02:rgba(42,43,51,.2);--inside-accent-color-04:rgba(42,43,51,.4);--inside-accent-color-08:rgba(42,43,51,.8)}</style><script src="/theme.9ecc9ab1.js"></script>
